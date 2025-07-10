@@ -1,20 +1,17 @@
+// Flip card logic (unchanged)
 function updateCardHeight(card) {
   const cardInner = card.querySelector('.card-inner');
   const front = card.querySelector('.card-front');
   const back = card.querySelector('.card-back');
 
-  // Temporarily reset transform so scrollHeight is accurate
   cardInner.style.transform = 'none';
 
-  // Measure front and back heights
   const frontHeight = front.scrollHeight;
   const backHeight = back.scrollHeight;
-
-  // Use the maximum height so both sides fit without overflow
   const maxHeight = card.classList.contains('flipped') ? backHeight : frontHeight;
+
   cardInner.style.height = maxHeight + 'px';
 
-  // Restore transform depending on flipped state
   if (card.classList.contains('flipped')) {
     cardInner.style.transform = 'rotateY(180deg)';
   } else {
@@ -22,7 +19,6 @@ function updateCardHeight(card) {
   }
 }
 
-// Add click listeners to all flip buttons (front and back)
 document.querySelectorAll('.flip-button, .flip-back-button').forEach(button => {
   button.addEventListener('click', () => {
     const card = button.closest('.card');
@@ -31,7 +27,20 @@ document.querySelectorAll('.flip-button, .flip-back-button').forEach(button => {
   });
 });
 
-// On initial load, set height for all cards
 document.querySelectorAll('.card').forEach(card => {
   updateCardHeight(card);
+});
+
+// Reset form on back/refresh after submission
+window.addEventListener('pageshow', function (event) {
+  // Check if back/forward navigation occurred
+  const navType = performance.getEntriesByType("navigation")[0]?.type;
+
+  if (event.persisted || navType === "back_forward") {
+    const form = document.querySelector('form');
+    if (form) {
+      form.reset();
+      alert('Form reset.');
+    }
+  }
 });

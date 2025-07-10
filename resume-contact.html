@@ -80,19 +80,21 @@
 
     <section id="contact">
       <h3>Inquiries</h3>
-      <form>
+      <form action="https://formspree.io/f/mblynrwl" method="POST">
         <label>Name</label>
-        <input type="text" placeholder="First and Last" required>
+        <input type="text" name="name" placeholder="First and Last" required>
 
         <label>Phone Number</label>
-        <input type="tel" placeholder="(555)-555-5555" required>
+        <input type="tel" name="phone" placeholder="(555)-555-5555" required>
 
         <label>Email</label>
-        <input type="email" placeholder="Enter a valid email" required>
+        <input type="email" name="email" placeholder="Enter a valid email" required>
 
         <label>Message</label>
-        <textarea placeholder="Give a short description of your inquiry." required></textarea>
+        <textarea name="message" placeholder="Give a short description of your inquiry." required></textarea>
 
+        <input type="text" name="_gotcha" style="display:none">
+        
         <button type="submit">Submit</button>
       </form>
     </section>
